@@ -1,3 +1,4 @@
+import { Route } from 'react-router-dom'
 import React, { Component } from "react"
 import CandyList from "./CandyTypes/CandyList"
 import EmployeeList from "./Employees/EmployeeList"
@@ -5,53 +6,50 @@ import StoreList from "./StoreList/StoreList"
 
 class KandyKorner extends Component {
 
-  storeArray = [
-    { id: 1, name: "North Store" },
-    { id: 2, name: "South Store" },
-    { id: 3, name: "West Store" },
-    { id: 4, name: "East Store" }
-]
-
-
-  employeeArray = [
-    { id: 1, name: "Ken"},
-    { id: 2, name: "Chad"},
-    { id: 3, name: "Bob"},
-    { id: 4, name: "Parker"},
-    { id: 5, name: "Tim"}
-  ]
-
-  candyTypeArray = [
-    { id: 1, name: "Chocolate"},
-    { id: 2, name: "Sour"},
-    { id: 3, name: "White Chocolate"},
-    { id: 4, name: "Jelly"}
-
-  ]
-
-  candyArray = [
-    { id: 1, name: "Snickers", candyTypeId: 1},
-    { id: 2, name: "Sour Patch Kids", candyTypeId: 2},
-    { id: 3, name: "Zero", candyTypeId: 3},
-    { id: 4, name: "Gummi Bears", candyTypeId: 4}
-  ]
-
-
   state = {
-    stores: this.storeArray,
-    employees: this.employeeArray,
-    candyTypes: this.candyTypeArray,
-    candies: this.candyArray
+    storeArray: [],
+    employeeArray: [],
+    candyTypeArray: [],
+    candyArray: []
+  }
+
+  componentDidMount () {
+    console.log("componentDidUpdate -- KandyKorner")
+
+    const newState = {}
+
+    fetch("http://localhost:5002/storeArray")
+            .then(r => r.json())
+            .then(storeArray => newState.storeArray = storeArray)
+            .then(() => fetch("http://localhost:5002/employeeArray")
+            .then(r => r.json()))
+            .then(employeeArray => newState.employeeArray = employeeArray)
+            .then(() => fetch("http://localhost:5002/candyTypeArray")
+            .then(r => r.json()))
+            .then(candyTypeArray => newState.candyTypeArray = candyTypeArray)
+            .then(() => fetch("http://localhost:5002/candyArray")
+            .then(r => r.json()))
+            .then(candyArray => newState.candyArray = candyArray)
+            .then(() => this.setState(newState))
+
 }
 
   render() {
+    console.log(this.state)
     return (
-        <article className="kandy">
-          <CandyList candyTypes={this.state.candyTypes} candies={this.state.candies}/>
-          <EmployeeList employees= {this.state.employees}/>
-          <StoreList stores= {this.state.stores}/>
+      <React.Fragment>
+                <Route exact path="/candyTypeArray" render={(props) => {
+                    return <CandyList candyTypes={this.state.candyTypes} candies={this.state.candies}/>
 
-        </article>
+                }} />
+                <Route path="/employeeArray" render={(props) => {
+                    return <EmployeeList employeeArray= {this.state.employeeArray}/>
+                }} />
+                <Route path="/storeArray" render={(props) => {
+                    return  <StoreList stores= {this.state.stores}/>
+                }} />
+            </React.Fragment>
+
     )
 }
 }
