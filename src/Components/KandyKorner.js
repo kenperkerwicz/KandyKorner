@@ -35,18 +35,22 @@ class KandyKorner extends Component {
 }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <React.Fragment>
-                <Route exact path="/candyTypeArray" render={(props) => {
-                    return <CandyList candyTypes={this.state.candyTypes} candies={this.state.candies}/>
+                <Route exact path="/" render={(props) => {
+                  
+                    return <CandyList candyTypes={this.state.candyTypeArray} candies={this.state.candyArray}/>
 
                 }} />
-                <Route path="/employeeArray" render={(props) => {
-                    return <EmployeeList employeeArray= {this.state.employeeArray}/>
-                }} />
+
+                <Route exact path="/employeeArray" render={(props) => {
+                  return <EmployeeList employees= {this.state.employeeArray}/>
+
+                } }/>
+
                 <Route path="/storeArray" render={(props) => {
-                    return  <StoreList stores= {this.state.stores}/>
+                    return  <StoreList stores= {this.state.storeArray}/>
                 }} />
             </React.Fragment>
 

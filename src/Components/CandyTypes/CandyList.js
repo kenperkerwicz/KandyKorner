@@ -6,10 +6,11 @@ export default class CandyList extends Component {
     return (
       <section className="candy">
        <h5>Candy List</h5>
+      
        <h5>{this.props.candyTypes.map(candyTypes =>
                     <div key={candyTypes.id}>
                         {candyTypes.name}
-                    </div>) }</h5>
+                    </div>)}</h5>
        <IndividualCandy candies={this.props.candies}/>
       </section>
     )
