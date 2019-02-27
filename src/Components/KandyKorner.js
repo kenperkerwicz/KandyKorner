@@ -47,7 +47,7 @@ class KandyKorner extends Component {
   render() {
     return (
         <article className="kandy">
-          <CandyList candyTypes={this.state.candyTypes} candy={this.state.candies}/>
+          <CandyList candyTypes={this.state.candyTypes} candies={this.state.candies}/>
           <EmployeeList employees= {this.state.employees}/>
           <StoreList stores= {this.state.stores}/>
 
