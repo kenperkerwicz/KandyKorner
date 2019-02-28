@@ -8,7 +8,7 @@ class NavBar extends Component {
           <nav className="navbar navbar-light fixed-top light-blue flex-md-nowrap p-0 shadow">
               <ul className="nav nav-pills">
                   <li className="nav-item">
-                      <Link className="nav-link" to="/">Locations</Link>
+                      <Link className="nav-link" to="/">Candy Types</Link>
                   </li>
                   <li className="nav-item">
                       <Link className="nav-link" to="/storeArray">Stores</Link>
@@ -16,9 +16,9 @@ class NavBar extends Component {
                   <li className="nav-item">
                       <Link className="nav-link" to="/employeeArray">Employees</Link>
                   </li>
-                  <li className="nav-item">
+                  {/* <li className="nav-item">
                       <Link className="nav-link" to="/candyTypeArray">Candy Type</Link>
-                  </li>
+                  </li> */}
               </ul>
           </nav>
       )
